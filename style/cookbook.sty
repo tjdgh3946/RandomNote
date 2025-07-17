@@ -1,0 +1,272 @@
+\input{style/math_commands}
+\usepackage[T1]{fontenc}
+\usepackage{xcolor}
+\usepackage[theorems]{tcolorbox}
+\usepackage{amsmath, amsthm, amsfonts}
+\usepackage{bm}
+\usepackage{mathrsfs}
+\usepackage{tcolorbox}
+\usepackage{natbib}
+\usepackage{graphicx,float}
+\usepackage[hidelinks]{hyperref}
+\usepackage[nameinlink]{cleveref}
+\usepackage{sansmath}
+\usepackage{esint}
+\usepackage{pifont}
+\usepackage{kotex}
+\usepackage{titlesec}
+\definecolor{deepRose}{HTML}{8E3A3E}
+\definecolor{burgundy}{HTML}{A8415B}
+\definecolor{deepgreen}{HTML}{556B2F}
+\definecolor{olivegreen}{HTML}{BAB86C}
+\definecolor{cadetblue}{HTML}{4d7fb2}
+\definecolor{myred}{HTML}{d8315b}
+\definecolor{myblue}{HTML}{416BA8}
+\definecolor{ubred}{HTML}{D13F3D}
+\definecolor{ubblue}{HTML}{4EA0B7}
+\definecolor{ubgreen}{HTML}{789a5b}
+\definecolor{cherry}{HTML}{DF3A42}
+\definecolor{byzantine}{HTML}{702963}
+\definecolor{navy}{HTML}{000080}
+\definecolor{darkgray}{HTML}{838383}
+\definecolor{beige}{HTML}{AE9B7D}
+\definecolor{tomato}{HTML}{bf4c4c}
+\usepackage[bottom]{footmisc}
+\usepackage{helvet}
+\usepackage{tocloft}
+\usepackage{graphicx,stackengine,scalerel}
+
+\renewcommand\contentsname{Recipe}
+\renewcommand\cfttoctitlefont{\normalfont\LARGE\bfseries\textglow}
+\renewcommand{\cftsecfont}{\normalfont\bfseries}
+%\renewcommand{\cftsubsecfont}{\sffamily}
+%\renewcommand{\cftsubsubsecfont}{\sffamily}
+%\setmainfont{lato} 
+
+
+% 섹션 스타일 설정
+%\newcommand\titlebar{%
+%\tikz[baseline,trim left=3.1cm,trim right=3cm] {
+%    %\fill [byzantine!25] (2.5cm,-1ex) rectangle (\textwidth+3.1cm,2.5ex);
+%    \node [
+%        fill=byzantine!60!white,
+%        anchor= base east,
+%        minimum height=3.5ex] at (3cm,0) {
+%        \textbf{\shadowtext{\thesection.}}
+%    };
+%}%
+%}
+\makeatletter
+\def\textglow#1{%
+	\leavevmode%
+	\pdfliteral{q 1 J 1 j 1 Tr}%
+	\foreach\layer in{1,...,10}{%
+		\color{gray!\layer0!white!50!white}%
+		\pgfsetlinewidth{(11-\layer)/5}% pgf command will do arithmetic for us
+		\rlap{#1}%
+	}%
+	\pdfliteral{Q}%
+	\hbox{#1}%
+}
+
+\titleformat{\section}
+  {\bfseries\Large}
+  {\textglow\thesection.}  % 자동 넘버링 출력
+  {.5em} 
+  {\textglow}  % 섹션 제목 자체에 그림자 효과
+  
+
+%\titleformat{\section}{\Large}{\thesection}{0.1cm}{}
+%\sectionfont{\color{cyan}}
+\titleformat{\subsection}{\large}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{}{\thesubsubsection}{1em}{}
+\hypersetup{colorlinks=true,
+            citecolor=olivegreen, 
+            linkcolor=black, 
+            urlcolor=deepRose}
+% set page geometry
+\usepackage[verbose=true,letterpaper]{geometry}
+\AtBeginDocument{
+  \newgeometry{
+    textheight=9in,
+    textwidth=5.5in,
+    top=1in,
+    headheight=12pt,
+    headsep=25pt,
+    footskip=15pt
+  }
+  \@ifpackageloaded{fullpage}
+    {\PackageWarning{neurips_2023}{fullpage package not allowed! Overwriting formatting.}}
+    {}
+}
+% page Head Structure
+\usepackage{fancyhdr}
+\definecolor{headercolor}{HTML}{4d7fb2}
+\pagestyle{fancy}
+\setlength{\headwidth}{5.5in} 
+\fancyhf{}
+\cfoot{\thepage}
+\fancyhead[L]{\textcolor{black}{\nouppercase \rightmark}}
+\renewcommand{\headrulewidth}{0.4pt}  % Thickness of header line
+\renewcommand{\headrule}{\color{black}\hrule width\headwidth}  % Set header line color
+
+\setlength{\headheight}{13.6pt} % 안전하게 크게
+
+% Section and subsection formatting
+\renewcommand{\sectionmark}[1]{\markright{\thesection. #1}}         
+\renewcommand{\subsectionmark}[1]{%
+    \markboth{\thesubsection. \, #1}{\thesubsection. \, #1}%
+}
+    
+% 페이지 여백 설정
+\geometry{
+  a4paper,
+  left=1in, right=1.2in
+}
+
+% 새로운 maketitle 정의
+\makeatletter
+\renewcommand{\maketitle}{
+  \begin{center}
+    % 상단 여백
+    \vspace{2cm}
+    
+    % 선과 텍스트
+    \noindent
+    \begin{tikzpicture}[remember picture, overlay]
+      % 전체 너비
+      \def\LineWidth{1pt}
+      \def\LineLength{5cm}
+      
+      % 가운데 타이틀
+      \node[anchor=base] at (0,0) {\Huge\bfseries \textglow \@title};
+    \end{tikzpicture}
+
+    \begin{tikzpicture}[remember picture, overlay]
+      % 45도 각도로 이미지 삽입
+      \node[anchor=north west, rotate=0] at (-4.2, 2.0)
+      {\includegraphics[width=2cm]{Figure/ginzaLogo.png}};  % 이미지 경로 설정
+    \end{tikzpicture}
+        
+    {\large \@author}
+    
+  \end{center}
+}
+\makeatother
+
+% for breakable
+\makeatother
+\tcbuselibrary{theorems, skins, hooks, breakable}
+\makeatletter
+\tcbset{
+  after app={%
+    \ifx\tcb@drawcolorbox\tcb@drawcolorbox@breakable
+    \else
+      % add only when not breakabel
+      \@endparenv
+    \fi
+  }
+}
+\appto\tcb@use@after@lastbox{\@endparenv\@doendpe}
+\makeatother
+
+% Definition environment
+\newtcbtheorem[crefname={def}{Definition}, number within=section]%
+{define} % \begin..
+{Definition} % Title
+{enhanced, breakable, fonttitle=\bfseries, colframe=cadetblue, colback=cadetblue!5, before
+skip=15pt,after skip=15pt} % Style - default
+{def} % label prefix; cite as ``theo:yourlabel''
+
+
+% Theorem environment
+\newtcbtheorem[crefname={theorem}{Theorem}, number within=section]%
+{theorem} % \begin..
+{Theorem} % Title
+{enhanced, breakable, fonttitle=\bfseries, colframe=mauve, colback=mauve!5, before
+skip=15pt,after skip=15pt} % Style - default
+{thm} % label prefix; cite as ``theo:yourlabel''
+
+
+% Proposition environment
+\newtcbtheorem[crefname={proposition}{Proposition}, number within=section]%
+{prop} % \begin..
+{Proposition} % Title
+{enhanced, breakable, enhanced, breakable, fonttitle=\bfseries, colframe=wine, colback=wine!4, before
+skip=15pt,after skip=15pt} % Style - default
+{prop} % label prefix; cite as ``theo:yourlabel''
+
+
+% Lemma environment 
+\newtcbtheorem[crefname={lemma}{Lemma}, number within=section]%
+{lemma} % \begin..
+{Lemma} % Title
+{enhanced, breakable, fonttitle=\bfseries, colframe=deepgreen, colback=deepgreen!5, before
+skip=15pt,after skip=15pt} % Style - default
+{lemma} % label prefix; cite as ``theo:yourlabel''
+
+% Corollary environment 
+\newtcbtheorem[crefname={corollary}{Corollary}, number within=section]%
+{corollary} % \begin..
+{Corollary} % Title
+{enhanced, breakable, fonttitle=\bfseries, colframe=olivegreen, colback=olivegreen!5, before
+skip=15pt,after skip=15pt} % Style - default
+{cor} % label prefix; cite as ``theo:yourlabel''
+
+
+
+\makeatletter
+\let\@mycite\@cite
+\def\@cite#1#2{{\hypersetup{linkcolor=green}[{#1\if@tempswa , #2\fi}]}}
+\makeatother
+
+
+
+% emphasize 
+\newcommand{\red}[1]{\textcolor{ubred}{#1}}
+\newcommand{\orange}[1]{\textcolor{orange}{#1}}
+\newcommand{\blue}[1]{\textcolor{ubblue}{#1}}
+\newcommand{\rose}[1]{\textcolor{deepRose}{#1}}
+\newcommand{\green}[1]{\textcolor{ubgreen}{#1}}
+\newcommand{\navy}[1]{\textcolor{navy}{#1}}
+\newcommand{\alert}[1]{\bm{\textcolor{deepRose}{#1}}}
+\newcommand{\bblue}[1]{\bm{\textcolor{ubblue}{#1}}}
+\newcommand{\bred}[1]{\bm{\textcolor{ubred}{#1}}}
+\newcommand{\bgreen}[1]{\noindent\bm{\textcolor{ubgreen}{#1}}}
+
+% Equation with section number 
+\numberwithin{equation}{section}
+
+\newcommand{\header}[1]{\noindent\textcolor{deepRose}{\textbf{#1.}}}
+\newcommand{\memo}[1]{\text{\textcolor{navy}{#1}}}
+
+\renewcommand{\implies}{\Rightarrow}
+
+\def\tang{\ThisStyle{\abovebaseline[0pt]{\scalebox{-1}{$\SavedStyle\perp$}}}}
+
+\newtcolorbox{ginzabox}[1][]{%
+  enhanced,
+  colback=white,
+  colframe=black,
+  arc=2mm,
+  boxrule=0.3pt,
+  drop shadow={opacity=0.15},
+  breakable,
+  left=5mm,
+  right=5mm,
+  top=4mm,
+  bottom=4mm,
+  fonttitle=\bfseries,
+  before skip=12pt,
+  after skip=12pt, 
+  coltitle=black,
+  colbacktitle=white,
+  attach boxed title to top left={yshift=-2mm, xshift=4mm},
+  boxed title style={
+    colframe=black,
+    colback=white,
+    boxrule=0.5pt,
+    sharp corners,
+  },
+  title=#1
+}

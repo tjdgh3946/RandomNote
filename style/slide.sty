@@ -1,0 +1,394 @@
+\usepackage{xcolor}
+\usepackage{xspace}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{mathrsfs}
+\usepackage{kotex}
+\usepackage{cleveref}
+\usepackage{pifont}
+\usepackage{esint}
+\usepackage{mathtools}
+\usepackage{svg}
+\usepackage{csquotes} 
+
+\input{style/math_commands}
+
+
+% Define color 
+\definecolor{deepgreen}{HTML}{556B2F}
+\definecolor{wine}{HTML}{503e5b}
+\definecolor{mauve}{HTML}{918387}
+\definecolor{olivegreen}{HTML}{BAB86C}
+\definecolor{cadetblue}{HTML}{577fa8}
+\definecolor{myblue}{HTML}{327ECC}
+\definecolor{myred}{HTML}{d8315b}
+\definecolor{mygreen}{HTML}{20925A}
+\definecolor{BrownTOL}{HTML}{666633}
+\definecolor{DarkGreen}{HTML}{002224}
+\definecolor{Darkteal}{HTML}{001C58}
+\definecolor{salmon}{HTML}{FA8072}
+\definecolor{sakura}{HTML}{FF1E4A}
+\definecolor{uibred}{HTML}{d13f3d}
+\definecolor{uibblue}{HTML}{4ea0b7}
+\definecolor{uibgreen}{HTML}{789a5b}
+\definecolor{uibgray}{HTML}{f7f7f7}
+% Link color setup 
+\hypersetup{citecolor=uibblue}
+\hypersetup{linkcolor=uibblue}
+\newcommand{\point}{$\textcolor{uibred}{\bullet}$ \;}
+
+\useinnertheme{rectangles}
+\setbeamertemplate{qed symbol}{\(\blacksquare\)}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{caption label separator}{: }
+
+               
+%% Standard colours:
+\colorlet{alert}{uibblue}
+\setbeamercolor{structure}{fg = uibred}
+\setbeamercolor{block title}{fg = white,
+                             bg = uibred}
+\setbeamercolor{block body} {bg = uibgray}
+\setbeamercolor{block title example}{fg = white,
+                                     bg = uibgreen}
+\setbeamercolor{block body example} {bg = uibgray}
+\setbeamercolor{block title alerted}{fg = white,
+                                     bg = uibblue}
+\setbeamercolor{block body alerted} {bg = uibgray}
+\setbeamercolor{alerted text} {fg = uibblue}
+\setbeamercolor{footnote mark}{fg = uibred}
+\setbeamercolor{section in head/foot}{fg = white,
+                                      bg = uibred}
+\setbeamercolor{section in toc}{fg = black}
+\setbeamercolor{bibliography entry location}{fg = structure}
+
+% 자주쓰는 keyword
+\newcommand{\prb}[1]{\textcolor{olivegreen}{\textbf{Problem #1. }}}
+\newcommand{\exam}[1]{\textcolor{olivegreen}{\textbf{Example #1. }}}
+\newcommand{\ocr}[1]{\textcolor{olivegreen}{{#1}}}
+\newcommand{\blueheader}[1]{\alert{\textbf{#1. }}}
+% cross reference 관련 
+\hypersetup{colorlinks}
+\makeatletter
+\let\@mycite\@cite
+\def\@cite#1#2{{\hypersetup{linkcolor=uibred}[{#1\if@tempswa , #2\fi}
+]}}
+\makeatother
+\numberwithin{equation}{section}
+\let\chyperref\cref
+\let\cchyperref\Cref
+
+\renewcommand{\cref}[1]{\hyperlink{#1}{\chyperref{#1}}}
+\renewcommand{\Cref}[1]{\hyperlink{#1}{\cchyperref{#1}}}
+
+% Set block environments 
+\setbeamertemplate{theorems}[numbered]
+\setbeamertemplate{blocks}[shadow=true]
+
+
+%% Redefine blocks with larger indentations,
+%% and some environmental colours:
+\setbeamertemplate{block begin}
+{
+    \setbeamercolor{itemize item}      {fg = block title.bg}
+    \setbeamercolor{itemize subitem}   {fg = block title.bg}
+    \setbeamercolor{itemize subsubitem}{fg = block title.bg}
+    \setbeamercolor{item projected}{fg = block title.fg,
+                                    bg = block title.bg}
+    \setbeamercolor{description item}{fg = alert}
+    \setbeamercolor{caption name}    {fg = alert}
+
+    \unskip
+    \vskip1.3ex
+
+    \begin{beamercolorbox}[ht        = 2.4  ex,
+                           dp        = 1    ex,
+                           leftskip  = 0.75 ex,
+                           rightskip = 0.75 ex]
+                          {block title}
+
+        \usebeamerfont*{block title alerted}
+        \insertblocktitle
+    \end{beamercolorbox}
+
+    \nointerlineskip
+
+    \usebeamerfont*{block body}
+    \begin{beamercolorbox}[dp        = 1    ex,
+                           leftskip  = 0.75 ex,
+                           rightskip = 0.75 ex,
+                           vmode]
+                          {block body}
+        \vspace*{1ex}
+        \begin{minipage}{\textwidth - 1.5ex}
+}
+
+\setbeamertemplate{block end}
+{
+        \end{minipage}
+    \vskip0pt
+    \end{beamercolorbox}
+    \vskip1.3ex
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\setbeamertemplate{block alerted begin}
+{
+    \setbeamercolor{itemize item}      {fg = block title alerted.bg}
+    \setbeamercolor{itemize subitem}   {fg = block title alerted.bg}
+    \setbeamercolor{itemize subsubitem}{fg = block title alerted.bg}
+    \setbeamercolor{item projected}{fg = block title alerted.fg,
+                                    bg = block title alerted.bg}
+    \setbeamercolor{description item}{fg = alert}
+    \setbeamercolor{caption name}    {fg = alert}
+
+    \unskip
+    \vskip1.3ex
+
+    \begin{beamercolorbox}[ht        = 2.4  ex,
+                           dp        = 1    ex,
+                           leftskip  = 0.75 ex,
+                           rightskip = 0.75 ex]
+                          {block title alerted}
+
+        \usebeamerfont*{block title alerted}
+        \insertblocktitle
+    \end{beamercolorbox}
+
+    \nointerlineskip
+
+    \usebeamerfont{block body alerted}
+    \begin{beamercolorbox}[dp        = 1    ex,
+                           leftskip  = 0.75 ex,
+                           rightskip = 0.75 ex,
+                           vmode]
+                          {block body alerted}
+        \vspace*{1ex}
+        \begin{minipage}{\textwidth - 1.5ex}
+}
+
+\setbeamertemplate{block alerted end}
+{
+        \end{minipage}
+    \vskip0pt
+    \end{beamercolorbox}
+    \vskip1.3ex
+
+}
+
+\setbeamertemplate{block example begin}
+{
+    \setbeamercolor{itemize item}      {fg = block title example.bg}
+    \setbeamercolor{itemize subitem}   {fg = block title example.bg}
+    \setbeamercolor{itemize subsubitem}{fg = block title example.bg}
+    \setbeamercolor{item projected}{fg = block title example.fg,
+                                    bg = block title example.bg}
+    \setbeamercolor{description item}{fg = alert}
+    \setbeamercolor{caption name}    {fg = alert}
+
+    \unskip
+    \vskip1.3ex
+
+    \begin{beamercolorbox}[ht        = 2.4  ex,
+                           dp        = 1    ex,
+                           leftskip  = 0.75 ex,
+                           rightskip = 0.75 ex]
+                          {block title example}
+
+        \usebeamerfont*{block title example}
+        \insertblocktitle
+    \end{beamercolorbox}
+
+    \nointerlineskip
+
+    \usebeamerfont{block body example}
+    \begin{beamercolorbox}[dp        = 1    ex,
+                           leftskip  = 0.75 ex,
+                           rightskip = 0.75 ex,
+                           vmode]
+                          {block body example}
+        \vspace*{1ex}
+        \begin{minipage}{\textwidth - 1.5ex}
+}
+
+\setbeamertemplate{block example end}
+{
+        \end{minipage}
+    \vskip0pt
+    \end{beamercolorbox}
+    \vskip1.3ex
+
+}
+
+%Lemma
+\makeatletter
+\let\lemma\@undefined
+\makeatother
+\newtheorem{lemma}{Lemma}
+\BeforeBeginEnvironment{lemma}{
+        \setbeamercolor{block title}{use=example text, fg=white,bg=uibgreen}
+        \setbeamercolor{block body}{parent=normal text,use=block title alerted,bg=uibgray}
+        \setbeamerfont{block body}{shape=\normalfont}
+}
+
+%Corollary 
+\makeatletter
+\let\corollary\@undefined
+\makeatother
+\newtheorem{corollary}{Corollary}
+\BeforeBeginEnvironment{corollary}{
+        \setbeamercolor{block title}{use=example text, fg=white,bg=olivegreen}
+        \setbeamerfont{block body}{shape=\normalfont}
+        \setbeamercolor{block body}{parent=normal text,use=block title alerted,bg=uibgray}
+}
+%proposition
+\newtheorem{proposition}{Proposition}
+\BeforeBeginEnvironment{proposition}{
+        \setbeamercolor{block title}{use=example text, fg=white,bg=uibblue}
+        \setbeamerfont{block body}{shape=\normalfont}
+        \setbeamercolor{block body}{parent=normal text,use=block title alerted,bg=uibgray}
+}
+%Definition
+\newtheorem{define}{Definition}
+\BeforeBeginEnvironment{define}{
+        \setbeamercolor{block title}{use=example text, fg=white,bg=cadetblue}
+        \setbeamerfont{block body}{shape=\normalfont}
+        \setbeamercolor{block body}{parent=normal text,use=block title alerted,bg=uibgray}
+}
+
+    
+% Colored text 
+\newcommand{\blue}[1]{\textcolor{myblue}{#1}}
+\newcommand{\red}[1]{\textcolor{uibred}{#1}}
+\newcommand{\green}[1]{\textcolor{mygreen}{#1}}
+\newcommand{\bblue}[1]{\bm{\textcolor{uibblue}{#1}}}
+\newcommand{\bred}[1]{\bm{\textcolor{uibred}{#1}}}
+\newcommand{\bgreen}[1]{\bm{\textcolor{uibgreen}{#1}}}
+% Set layout for the title page  
+\makeatletter
+\setbeamertemplate{title page}{
+  \begin{minipage}[b][\paperheight]{\textwidth}
+    %\centering  % <-- Center here
+    \vskip -0.5in 
+    \ifx\inserttitlegraphic\@empty\else\usebeamertemplate*{title graphic}\fi
+    \vfill%
+    \ifx\inserttitle\@empty\else\usebeamertemplate*{title}\fi
+    \ifx\insertsubtitle\@empty\else\usebeamertemplate*{subtitle}\fi
+    \usebeamertemplate*{title separator}
+    \vskip -0.14in
+    \ifx\beamer@shortauthor\@empty\else\usebeamertemplate*{author}\fi
+    \ifx\insertdate\@empty\else\usebeamertemplate*{date}\fi
+    \ifx\insertinstitute\@empty\else\usebeamertemplate*{institute}\fi
+    \vfill
+    \vspace*{1mm}
+  \end{minipage}
+}
+\makeatother
+\setbeamerfont{title}{series=\normalfont}
+\setbeamerfont{subtitle}{series=\fontseries{l}\selectfont}
+\setbeamerfont{author}{series=\fontseries{l}\selectfont}
+\setbeamerfont{institute}{series=\fontseries{l}\selectfont}
+% Set title separator
+\setbeamercolor{title separator}{fg=uibred, bg=teal}
+\makeatletter
+\makeatother
+
+% Logo 
+\titlegraphic{
+\begin{tikzpicture}[overlay, remember picture]
+   \node[left=1.0cm] at (current page.13){
+   %\includesvg[width=5cm]{Figure/ICLR-Logo.svg}
+   };
+\end{tikzpicture}
+}
+
+% Set centered page number 
+\defbeamertemplate{footline}{centered page number}
+{%
+  \hspace*{\fill}%
+  \usebeamercolor[fg]{page number in head/foot}%
+  \usebeamerfont{page number in head/foot}%
+  \insertpagenumber\,/\,\insertpresentationendpage%
+  \hspace*{\fill}\vskip2pt%
+}
+\setbeamertemplate{footline}[centered page number]
+
+% Set layout for the frame 
+\makeatletter
+\setbeamercolor{framesubtitle}{fg=mDarkTeal}
+\defbeamertemplate*{frametitle}{myframetitle}{%
+    \nointerlineskip
+    \begin{beamercolorbox}[%
+        wd=\paperwidth,%
+        sep=0pt,%
+        rightskip=\metropolis@frametitle@padding,
+        ]{frametitle}%
+        \metropolis@frametitlestrut@start
+        \quad\insertframetitle%%%%%%%%%%%%%%%%%%%%%%
+        \nolinebreak
+        \metropolis@frametitlestrut@end
+    \end{beamercolorbox}\par
+    \usebeamerfont{framesubtitle}%
+    \usebeamercolor[fg]{framesubtitle}%
+    \vskip -0.07in
+    \hspace*{-1.95\metropolis@frametitle@padding}%
+    \insertframesubtitle
+    %\vskip -0.05in
+}
+\makeatother
+\setbeamertemplate{frametitle}[myframetitle]
+
+\AtBeginDocument{\setlength\abovedisplayskip{2pt}}
+\AtBeginDocument{\setlength\belowdisplayskip{2pt}}
+%\setbeamercolor{progress bar}{fg=Darkteal}
+
+\setbeamercolor{frametitle}{bg=white,fg=uibred}
+\setbeamercolor{frametitle}{bg=white,fg=uibred}
+\setbeamerfont{frametitle}{size=\Large}
+\setbeamercolor{background canvas}{bg=white}
+\setbeamertemplate{frametitle continuation}{}
+\pdfstringdefDisableCommands{\let\uppercase\relax}
+
+% Reuse the previous frame title 
+\makeatletter
+\def\beamer@checkframetitle{%
+\begingroup
+  \edef\temp{%
+    \endgroup
+    \noexpand\frametitle
+    [\unexpanded\expandafter{\beamer@savedshortframetitle}]%
+    {\unexpanded\expandafter{\beamer@savedframetitle}}%
+  }
+\temp
+\@ifnextchar\bgroup\beamer@inlineframetitle{}}
+
+\long\def\beamer@@frametitle[#1]#2{%
+  \beamer@ifempty{#2}{}{%
+    \gdef\insertframetitle{{#2\ifnum\beamer@autobreakcount>0\relax{}\space\usebeamertemplate*{frametitle
+continuation}\fi}}%
+  \gdef\beamer@frametitle{#2}%
+  \gdef\beamer@shortframetitle{#1}%
+  \global\let\beamer@savedshortframetitle\beamer@shortframetitle
+    \global\let\beamer@savedframetitle\beamer@frametitle
+}%
+}
+  \global\let\beamer@savedshortframetitle\@empty
+    \global\let\beamer@savedframetitle\@empty
+\makeatother
+
+\setbeamerfont{section title}{size=\LARGE}
+\setbeamercolor{progress bar}{fg=orange}
+% Customize the section page layout
+\setbeamertemplate{section page}{
+  \frametitle{\textcolor{white}{Placeholder}}
+  \begin{centering}
+  \vspace{-1cm}
+    % Adjust vertical position of the section title
+    \vspace{-1cm}
+    {\usebeamerfont{section title}\insertsection\par}
+    \usebeamertemplate*{progress bar in section page}
+  \end{centering}
+}

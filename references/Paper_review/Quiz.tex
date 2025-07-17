@@ -1,0 +1,39 @@
+\documentclass[9pt,t,aspectratio=169]{beamer}
+\usetheme{metropolis}
+\usepackage{style/slide}
+\usepackage{listings}
+\usepackage{amsmath}
+\usepackage[default]{lato}
+\usepackage[T1]{fontenc}
+\title{Hermite Polynomial Features for Private Data Generation}
+
+\subtitle{起承轉結}
+\date{}
+\author{Seongho Joo}
+\institute{SNU MILAB}
+
+\begin{document}
+\maketitle
+\begin{frame}{}
+\begin{exampleblock}{Quiz}
+    1) Let $B_1(0)$ be the unit ball in $\real^n$ centered at the origin. Assume that the function $f \in C^2(B_1(0))$ and 
+    \begin{enumerate}
+        \item\begin{equation}
+            \sum_{i, j=1}^n x_i x_j \frac{\partial^2 f}{\partial x_i \partial x_j} =0 
+        \end{equation}
+        on $B_1(0)$
+        \item $\nabla f = 0$
+    \end{enumerate}
+    Show that $f$ is constant on $B_1(0)$.
+    
+    2) If $f$ satisfies 
+    \begin{equation}
+        x_i \frac{\partial f}{\partial x_j} - x_j \frac{\partial f}{\partial x_i} =0, \; i,j = 1, \dots, n 
+    \end{equation}
+    on $B_1(0)$, then $f$ is constant on the sphere $\set{x: x \in B_1(0), |x| = \frac{1}{2}}$.
+\end{exampleblock}
+\end{frame}
+\begin{frame}{notitle}
+Every $(\varepsilon, \delta)$-DP algorithm requires $\tilde{\Omega}(\sqrt{d} /\varepsilon)$ samples so that it satisfies $\E_{\hat{\theta} \sim \mathcal{A}_n (X^{(n)})} [ F ( \hat{\theta}; X^{(n)})] \leq (1+\alpha) \min_{\theta \in \real^d} F (\theta, X^{(n)})$
+\end{frame}
+\end{document}
